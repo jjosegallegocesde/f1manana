@@ -13,6 +13,9 @@ import formula1.vistas.VistaHome;
 import formula1.vistas.VistaIngreso;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,7 +55,19 @@ public class ControladorIngreso implements ActionListener {
          
          //registro de piloto
          piloto.setNombres(vistaingreso.cajaNombrePiloto.getText());
-         piloto.setApellidos(vistaingreso.);
+         piloto.setApellidos(vistaingreso.cajaApellido.getText());
+         piloto.setSalario(Integer.parseInt(vistaingreso.cajaSalarioPiloto.getText()));
+         
+        Date entrada = new Date();
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String fechaEntrada=formato.format(entrada);
+        piloto.setFechaIn(fechaEntrada);
+        
+        piloto.setIdEscuderia(vistaingreso.cajaIdEscuderia.getText());
+        
+        
+         
+         
         
     }
     
