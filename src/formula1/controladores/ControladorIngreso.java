@@ -66,8 +66,18 @@ public class ControladorIngreso implements ActionListener {
         piloto.setIdEscuderia(vistaingreso.cajaIdEscuderia.getText());
         
         
-         
-         
+        //llamar las consultas SQL para agregar una escuderia y un piloto
+        if(consultasEscuderia.registrarEscuderia(escuderia)
+                &&consultasPilotos.registrarPiloto(piloto)){
+            
+            JOptionPane.showMessageDialog(null, "Exito agregando los datos");
+            
+        }else{
+            
+            JOptionPane.showMessageDialog(null, "Error agregando los datos");
+            
+        }
+        
         
     }
     

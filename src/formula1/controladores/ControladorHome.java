@@ -10,6 +10,7 @@ import formula1.modelos.Escuderia;
 import formula1.modelos.Piloto;
 import formula1.vistas.VistaHome;
 import formula1.vistas.VistaIngreso;
+import formula1.vistas.VistaSalida;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -42,7 +43,11 @@ public class ControladorHome implements ActionListener {
         //SI consulta una escuderia y esta SI se encuentra
         if(consultasEscuderia.buscarEscuderia(id)!=null){
             
-            //todo ok (retiro)
+            //lanzar la vista de retiro
+            VistaSalida vistaSalida = new VistaSalida();
+            vistahome.setVisible(false);
+            vistaSalida.setVisible(true);
+            
             
         }else{
             
@@ -50,6 +55,9 @@ public class ControladorHome implements ActionListener {
             VistaIngreso vistaIngreso = new VistaIngreso();
             vistahome.setVisible(false);
             vistaIngreso.setVisible(true);
+            
+            ControladorIngreso controladorIngreso = 
+                    new ControladorIngreso(vistaIngreso,escuderia,piloto);
             
         }
         
