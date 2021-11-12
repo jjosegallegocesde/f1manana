@@ -12,6 +12,11 @@ import formula1.modelos.Piloto;
 import formula1.vistas.VistaSalida;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -40,7 +45,41 @@ public class ControladorSalida implements ActionListener {
          
          ConsultasPilotos consultasPilotos = 
                  new ConsultasPilotos();
+         
+         //Consultar los datos del piloto a buscar para poder editarlo
+         piloto=consultasPilotos.buscarPiloto(Integer.parseInt(vistasalida.cajaIdPiloto.getText()));
         
+         //consultar la fecha entrada STRING
+         String fechaEntrada=piloto.getFechaIn();
+         
+         //convertir la FECHA STRING EN DATE
+         try{
+             Date entrada = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(fechaEntrada);
+             
+             Date salida = new Date();
+             SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+             String fechaSalida =formato.format(salida);
+             
+             //rutina para calcular la resta de tiempo
+             long tiempoDiferencia=salida.getTime()-entrada.getTime();
+             TimeUnit unidadTiempo=TimeUnit.MINUTES;
+             long tiempoEnEscuderia=unidadTiempo.convert(tiempoDiferencia,TimeUnit.MILLISECONDS);
+             
+             //llevemos el valor de la fecha salida STRING al objeto piloto
+             piloto.setFechaOut(fechaSalida);
+             
+             //ejecutar la consulta para actualizar el piloto
+             if(consultasPilotos.actualizarPiloto(piloto)){
+                  JOptionPane.showMessageDialog(null, "Exito retirando, se quedo: "+tiempoEnEscuderia);
+             }else{
+                 JOptionPane.showMessageDialog(null, "Fallamos retirando");
+             }
+                     
+         }catch(ParseException error){
+             System.out.println("upsss.. "+error);
+         }
+         
+         
     }
     
     

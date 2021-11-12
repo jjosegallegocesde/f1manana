@@ -48,6 +48,9 @@ public class ControladorHome implements ActionListener {
             vistahome.setVisible(false);
             vistaSalida.setVisible(true);
             
+            ControladorSalida controladorSalida=
+                    new ControladorSalida(vistaSalida,escuderia,piloto);
+            
             
         }else{
             
